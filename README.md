@@ -15,7 +15,7 @@ Generate .gitignore files easily for multiple languages
 
 Gitignorer allows you to "merge" different languages' .gitignore files into one, which is called a **Template** 
 
-Templates are saved in Gitignorer's data directory(Homepath/.Gitignorer/Templates) 
+Templates are saved in Gitignorer's data directory(./gitignorer_data/Templates) 
 
 You can edit templates using any text editor, and add whatever files you want to be ignored (Make sure they are saved with a name like Templatename.Template.gitignore)
 
