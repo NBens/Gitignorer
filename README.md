@@ -3,13 +3,13 @@ Generate .gitignore files easily for multiple languages
 
 # Usage:
 
-1. New gitignore: ``` ./gitignorer -create Java ```
-2. Multiple gitignores: ``` ./gitignorer -create C++,Python,Java,Go (No spaces between commas) ```
-3. Update Gitignore files: ``` ./gitignorer -update ```
-4. List languages: ``` ./gitignorer -list ```
-5. Create a template: ``` ./gitignorer -create-template C++,Python,Java -name NameOfYourTemplate (No spaces between commas) ```
-6. List templates: ``` ./gitignorer -list-templates ```
-7. Use a template: ``` ./gitignorer -use-template TemplateName ```
+1. New gitignore: ``` ./gitignorer create Java ```
+2. Multiple gitignores: ``` ./gitignorer create C++,Python,Java,Go (No spaces) ```
+3. Update Gitignore files: ``` ./gitignorer update ```
+4. List languages: ``` ./gitignorer list ```
+5. Create a template: ``` ./gitignorer create-template C++,Python,Java -name NameOfYourTemplate (No spaces) ```
+6. List templates: ``` ./gitignorer list-templates ```
+7. Use a template: ``` ./gitignorer use-template TemplateName ```
 
 # Templates:
 
