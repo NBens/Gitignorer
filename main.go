@@ -94,7 +94,7 @@ func UnzipFile(src string, dest string) ([]string, error) {
 }
 
 // FilesNamesDir : Return an array with files name without the extension
-func GitignoresDir(filepath, extension string) ([]string, error) {
+func FilesNamesDir(filepath, extension string) ([]string, error) {
 	files := []string{}
 	data, err := ioutil.ReadDir(filepath)
 	if err != nil {
@@ -114,7 +114,7 @@ func list() {
 
 	fmt.Println("\nList of available languages:")
 	fmt.Println("============================")
-	languages, err := GitignoresDir("./gitignorer_data/gitignores", ".gitignore")
+	languages, err := FilesNamesDir("./gitignorer_data/gitignores", ".gitignore")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -123,7 +123,7 @@ func list() {
 
 	fmt.Println("\nGobal useful Gitignores:")
 	fmt.Println("========================")
-	globals, err := GitignoresDir("./gitignorer_data/gitignores/Global", ".gitignore")
+	globals, err := FilesNamesDir("./gitignorer_data/gitignores/Global", ".gitignore")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -132,7 +132,7 @@ func list() {
 
 	fmt.Println("\nAvailable Templates:")
 	fmt.Println("====================")
-	templates, err := GitignoresDir("./gitignorer_data/Templates", ".Template.gitignore")
+	templates, err := FilesNamesDir("./gitignorer_data/Templates", ".Template.gitignore")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
