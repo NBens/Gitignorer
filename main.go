@@ -14,7 +14,7 @@ import (
 // GitignoreFiles : Url to the zipped gitignore files
 const GitignoreFiles = "https://github.com/github/gitignore/archive/master.zip"
 
-// DownloadFile : Downloads a files from an url, and saving it to a path
+// DownloadFile : Downloads a files from an url, and saves it to a path
 func DownloadFile(path, url string) error {
 
 	file, err := os.Create(path)
@@ -110,6 +110,7 @@ func FilesNamesDir(filepath, extension string) ([]string, error) {
 	return files, nil
 }
 
+// list : Lists the available languages' gitignore files, global gitignore files, and templates
 func list() {
 
 	fmt.Println("\nList of available languages:")
@@ -171,7 +172,12 @@ func update() {
 
 // showHelp : Shows the available commands
 func showHelp() {
-	fmt.Println("Help")
+	fmt.Println(`
+Available commands:
+===================
+-list   : Lists the available languages' gitignore files, global gitignore files, and templates
+-update : Update command, downloads gitignore files from github, extracts them to gitignorer_data
+				`)
 }
 
 func main() {
@@ -187,7 +193,6 @@ func main() {
 		fmt.Println("Create")
 	case "list":
 		list()
-
 	case "create-template":
 		fmt.Println("Create Template")
 	case "list-templates":
