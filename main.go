@@ -110,6 +110,23 @@ func FilesNamesDir(filepath, extension string) ([]string, error) {
 	return files, nil
 }
 
+// ReadFile : Returns file contents as a string
+func ReadFile(filepath string) ([]byte, error) {
+	data, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		return nil, err
+	}
+	return data, err
+}
+
+// IsFileExist : Checks if a file/directory does exist or not
+func IsFileExist(filepath string) bool {
+	if _, err := os.Stat(filepath); os.IsNotExist(err) {
+		return false
+	}
+	return true
+}
+
 // list : Lists the available languages' gitignore files, global gitignore files, and templates
 func list() {
 
@@ -170,13 +187,40 @@ func update() {
 	fmt.Println("Updating Done!")
 }
 
+// create : Create command, Creates gitignore files from a list of languages/globals
+func create(filepath, languages string) {
+	languageSlice := strings.Split(languages, ",")
+	outData := []byte{}
+	for _, v := range languageSlice {
+		fullName := v + ".gitignore"
+		if !IsFileExist(filepath+fullName) && !IsFileExist(filepath+"Global/"+fullName) {
+			fmt.Println("Language/global gitignore " + v + " does not exist, skipping it")
+			continue
+		} else if IsFileExist(filepath + fullName) {
+			fullName = filepath + fullName
+		} else if IsFileExist(filepath + "Global/" + fullName) {
+			fullName = filepath + "Global/" + fullName
+		}
+		gitignoreData, err := ReadFile(fullName)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		outData = append(outData, []byte("\n##### "+v+" #####\n\n")...)
+		outData = append(outData, gitignoreData...)
+	}
+	mode := int(0777)
+	ioutil.WriteFile(".gitignore", outData, os.FileMode(mode))
+}
+
 // showHelp : Shows the available commands
 func showHelp() {
 	fmt.Println(`
 Available commands:
 ===================
+-update : Downloads gitignore files from github, extracts them to gitignorer_data
 -list   : Lists the available languages' gitignore files, global gitignore files, and templates
--update : Update command, downloads gitignore files from github, extracts them to gitignorer_data
+-create : Creates gitignore files from a list of languages/globals sparated by commas. Example: "create python,java,emacs"
 				`)
 }
 
@@ -190,7 +234,12 @@ func main() {
 	case "update":
 		update()
 	case "create":
-		fmt.Println("Create")
+		if len(os.Args) > 2 && strings.TrimSpace(os.Args[2]) != "" {
+			create("./gitignorer_data/gitignores/", os.Args[2])
+		} else {
+			showHelp()
+			os.Exit(1)
+		}
 	case "list":
 		list()
 	case "create-template":
