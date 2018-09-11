@@ -4,6 +4,8 @@ Generate .gitignore files easily for multiple languages
 # Building:
 Browse to the repository, and run the building command ``` go build ```
 
+This will generate a binary file. See the commands below
+
 # Usage:
 
 1. New gitignore: ``` ./gitignorer create Java ```
