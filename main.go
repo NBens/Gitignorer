@@ -16,8 +16,8 @@ func main() {
 	case "update":
 		Update()
 	case "create":
-		if len(os.Args) > 2 && strings.TrimSpace(os.Args[2]) != "" {
-			Create("./gitignorer_data/gitignores/", os.Args[2])
+		if len(os.Args) > 2 && strings.TrimSpace(os.Args[2]) != "" && IsFileExist("./gitignorer_data") {
+			Create(os.Args[2])
 		} else {
 			ShowHelp()
 			os.Exit(1)

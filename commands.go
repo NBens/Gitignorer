@@ -11,18 +11,20 @@ import (
 const GitignoreFiles = "https://github.com/github/gitignore/archive/master.zip"
 
 // Create : Create command, Creates gitignore files from a list of languages/globals
-func Create(filepath, languages string) {
+func Create(languages string) {
+	filepath := "./gitignorer_data/gitignores/"
+	globalPath := filepath + "Global/"
 	languageSlice := strings.Split(languages, ",")
 	outData := []byte{}
 	for _, v := range languageSlice {
 		fullName := v + ".gitignore"
-		if !IsFileExist(filepath+fullName) && !IsFileExist(filepath+"Global/"+fullName) {
+		if !IsFileExist(filepath+fullName) && !IsFileExist(globalPath+fullName) {
 			fmt.Println("Language/global gitignore " + v + " does not exist, skipping it")
 			continue
 		} else if IsFileExist(filepath + fullName) {
 			fullName = filepath + fullName
-		} else if IsFileExist(filepath + "Global/" + fullName) {
-			fullName = filepath + "Global/" + fullName
+		} else if IsFileExist(globalPath + fullName) {
+			fullName = globalPath + fullName
 		}
 		gitignoreData, err := ReadFile(fullName)
 		if err != nil {
