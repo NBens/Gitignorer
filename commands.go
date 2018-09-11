@@ -101,7 +101,7 @@ func Update() {
 
 // UseTemplate : Uses a template from gitignorer_data/Templates folder and outputs it to a file
 func UseTemplate(templateName, outputPath string) error {
-	template, err := ReadFile("./gitignorer_data/Templates/" + templateName)
+	template, err := ReadFile("./gitignorer_data/Templates/" + templateName + ".Template.gitignore")
 	if err != nil {
 		return err
 	}
@@ -120,7 +120,10 @@ Available commands:
 -update : Downloads gitignore files from github, extracts them to gitignorer_data
 -list   : Lists the available languages' gitignore files, global gitignore files, and templates
 -create : Creates gitignore files from a list of languages/globals sparated by commas.Example: create python,java,emacs
--create-template : Creates a template from a list of languages/globals, so that you can reuse it anytime
+-create-template : Creates a template from a list of languages/globals, so that you can reuse it anytime. 
+Example: create-template Java,Python,Emacs JavaEmacs
+-use-template : Use a created template to generate a gitignore file
+Example : use-template JavaEmacs
 Check https://github.com/NBens/gitignorer for more information.
 				`)
 }
