@@ -34,8 +34,9 @@ func Create(languages, outputPath string) {
 		outData = append(outData, []byte("\n##### "+v+" #####\n\n")...)
 		outData = append(outData, gitignoreData...)
 	}
-	mode := int(0777)
+	mode := int(0755)
 	ioutil.WriteFile(outputPath, outData, os.FileMode(mode))
+	fmt.Println("Saved as: " + outputPath)
 }
 
 // List : Lists the available languages' gitignore files, global gitignore files, and templates
@@ -98,6 +99,19 @@ func Update() {
 	fmt.Println("Updating Done!")
 }
 
+// UseTemplate : Uses a template from gitignorer_data/Templates folder and outputs it to a file
+func UseTemplate(templateName, outputPath string) error {
+	template, err := ReadFile("./gitignorer_data/Templates/" + templateName)
+	if err != nil {
+		return err
+	}
+	err = ioutil.WriteFile(outputPath, template, os.FileMode(int(077)))
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 // ShowHelp : Shows the available commands
 func ShowHelp() {
 	fmt.Println(`
@@ -105,7 +119,8 @@ Available commands:
 ===================
 -update : Downloads gitignore files from github, extracts them to gitignorer_data
 -list   : Lists the available languages' gitignore files, global gitignore files, and templates
--create : Creates gitignore files from a list of languages/globals sparated by commas. Example: "create python,java,emacs"
+-create : Creates gitignore files from a list of languages/globals sparated by commas.Example: create python,java,emacs
 -create-template : Creates a template from a list of languages/globals, so that you can reuse it anytime
+Check https://github.com/NBens/gitignorer for more information.
 				`)
 }

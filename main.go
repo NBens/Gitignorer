@@ -10,7 +10,6 @@ func main() {
 
 	if len(os.Args) == 1 {
 		ShowHelp()
-		os.Exit(1)
 	}
 	switch os.Args[1] {
 	case "update":
@@ -20,7 +19,6 @@ func main() {
 			Create(os.Args[2], ".gitignore")
 		} else {
 			ShowHelp()
-			os.Exit(1)
 		}
 	case "list":
 		List()
@@ -29,12 +27,22 @@ func main() {
 			Create(os.Args[2], "./gitignorer_data/Templates/"+os.Args[3]+".Template.gitignore")
 		} else {
 			ShowHelp()
-			os.Exit(1)
 		}
-	case "list-templates":
-		fmt.Println("List Templates")
 	case "use-template":
-		fmt.Println("Use Template")
+		if len(os.Args) > 2 && strings.TrimSpace(os.Args[2]) != "" && IsFileExist("./gitignorer_data") {
+			if IsFileExist("./gitignorer_data/Templates/" + os.Args[2] + ".Template.gitignore") {
+				useTemp := UseTemplate(os.Args[2], "Template."+os.Args[2]+".gitignore")
+				if useTemp != nil {
+					fmt.Println(useTemp)
+				} else {
+					fmt.Println("Saved as: " + "Template." + os.Args[2] + ".gitignore")
+				}
+			} else {
+				fmt.Println("Template doesn't exist")
+			}
+		} else {
+			ShowHelp()
+		}
 	default:
 		ShowHelp()
 	}
