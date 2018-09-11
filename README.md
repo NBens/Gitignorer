@@ -24,4 +24,4 @@ Templates are saved in Gitignorer's data directory(./gitignorer_data/Templates)
 
 You can edit templates using any text editor, and add whatever files you want to be ignored (Make sure they are saved with a name like Templatename.Template.gitignore)
 
-To use a template, run the command: ./gitignorer -use-template TemplateName
+To use a template, run the command: ./gitignorer use-template TemplateName
