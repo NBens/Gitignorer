@@ -7,7 +7,7 @@ Generate .gitignore files easily for multiple languages
 2. Multiple gitignores: ``` ./gitignorer create C++,Python,Java,Go (No spaces) ```
 3. Update Gitignore files: ``` ./gitignorer update ```
 4. List languages: ``` ./gitignorer list ```
-5. Create a template: ``` ./gitignorer create-template C++,Python,Java -name NameOfYourTemplate (No spaces) ```
+5. Create a template: ``` ./gitignorer create-template C++,Python,Java NameOfYourTemplate (No spaces) ```
 6. List templates: ``` ./gitignorer list-templates ```
 7. Use a template: ``` ./gitignorer use-template TemplateName ```
 

@@ -10,8 +10,8 @@ import (
 // GitignoreFiles : Url to the zipped gitignore files
 const GitignoreFiles = "https://github.com/github/gitignore/archive/master.zip"
 
-// Create : Create command, Creates gitignore files from a list of languages/globals
-func Create(languages string) {
+// Create : Create command, Creates files from a list of languages/globals and saves them
+func Create(languages, outputPath string) {
 	filepath := "./gitignorer_data/gitignores/"
 	globalPath := filepath + "Global/"
 	languageSlice := strings.Split(languages, ",")
@@ -35,7 +35,7 @@ func Create(languages string) {
 		outData = append(outData, gitignoreData...)
 	}
 	mode := int(0777)
-	ioutil.WriteFile(".gitignore", outData, os.FileMode(mode))
+	ioutil.WriteFile(outputPath, outData, os.FileMode(mode))
 }
 
 // List : Lists the available languages' gitignore files, global gitignore files, and templates
@@ -106,5 +106,6 @@ Available commands:
 -update : Downloads gitignore files from github, extracts them to gitignorer_data
 -list   : Lists the available languages' gitignore files, global gitignore files, and templates
 -create : Creates gitignore files from a list of languages/globals sparated by commas. Example: "create python,java,emacs"
+-create-template : Creates a template from a list of languages/globals, so that you can reuse it anytime
 				`)
 }

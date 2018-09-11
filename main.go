@@ -17,7 +17,7 @@ func main() {
 		Update()
 	case "create":
 		if len(os.Args) > 2 && strings.TrimSpace(os.Args[2]) != "" && IsFileExist("./gitignorer_data") {
-			Create(os.Args[2])
+			Create(os.Args[2], ".gitignore")
 		} else {
 			ShowHelp()
 			os.Exit(1)
@@ -25,7 +25,12 @@ func main() {
 	case "list":
 		List()
 	case "create-template":
-		fmt.Println("Create Template")
+		if len(os.Args) > 3 && strings.TrimSpace(os.Args[2]) != "" && IsFileExist("./gitignorer_data") {
+			Create(os.Args[2], "./gitignorer_data/Templates/"+os.Args[3]+".Template.gitignore")
+		} else {
+			ShowHelp()
+			os.Exit(1)
+		}
 	case "list-templates":
 		fmt.Println("List Templates")
 	case "use-template":
